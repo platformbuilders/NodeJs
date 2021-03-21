@@ -14,8 +14,8 @@ class User {
   @Column()
   password: string;
 
-  @Column('int')
-  status: number;
+  @Column('int', {default: 1})
+  status: number = 1;
 
   @CreateDateColumn()
   created_at: Date;
