@@ -13,4 +13,14 @@ export class UserRepository extends Repository<User> {
 
     return user;
   }
+
+  public async findbyName(name: string): Promise<User | undefined> {
+    const user = this.findOne({
+      where: {
+        name,
+      },
+    });
+
+    return user;
+  }
 }
