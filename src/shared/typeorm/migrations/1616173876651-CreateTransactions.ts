@@ -21,6 +21,7 @@ export class CreateTransactions1616173876651 implements MigrationInterface {
             {
               name: 'email',
               type: 'varchar',
+              isUnique: true
             },
             {
               name: 'password',

@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import UsersController from '../controllers/UsersController';
 import { celebrate, Joi, Segments } from 'celebrate';
+import CustomMessage from './CustomMessage';
 
 const usersRouter = Router();
 const userController = new UsersController();
+const customMessage = new CustomMessage();
 
 usersRouter.get('/', userController.index);
 
@@ -19,12 +21,12 @@ usersRouter.get(
 usersRouter.post(
   '/',
   celebrate({
-    [Segments.BODY]: {
+    [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-      password: Joi.string().min(6)
-    },
-  }),
+      password: Joi.string().min(6).messages(customMessage.customPt('password'))
+    })
+  }, {abortEarly: false}),
   userController.create);
 
 usersRouter.put(

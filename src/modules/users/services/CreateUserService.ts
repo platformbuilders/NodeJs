@@ -14,7 +14,7 @@ class CreateUserService {
   public async execute(data: IRequest): Promise<User> {
     // utilizando um repo customizado
     const userRepository = getCustomRepository(UserRepository);
-    const userExists = await userRepository.findbyName(data.email);
+    const userExists = await userRepository.findbyEmail(data.email);
 
     if (userExists) {
       throw new AppError('Este email já foi cadastrado');

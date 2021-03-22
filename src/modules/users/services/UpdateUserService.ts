@@ -22,7 +22,7 @@ class UpdateUserService {
       throw new AppError('Usuário não encontrado.');
     }
 
-    const userExists = await userRepository.findbyName(email);
+    const userExists = await userRepository.findbyEmail(email);
 
     if (userExists) {
       throw new AppError('Este email já foi cadastrado');
