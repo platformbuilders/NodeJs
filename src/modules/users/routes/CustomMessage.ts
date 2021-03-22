@@ -1,13 +1,13 @@
 
 class CustomMessage {
 
-  public customPt(field: String) {
+  public customPt() {
     let msgs = {
-      "string.base": `"${field}" deve ser do tipo 'texto'`,
-      "string.empty": `"${field}" não pode ser campo vazio`,
-      "string.min": `"${field}" deve ter no mínimo {#limit} caractéres`,
-      "string.max": `"${field}" deve ter no máximo {#limit} caractéres`,
-      "any.required": `"${field}" é um campo obrigatório`
+      "string.empty": `{#label} não pode ser campo vazio`,
+      "string.min": `{#label} deve ter no mínimo {#limit} caractéres`,
+      "string.max": `{#label} deve ter no máximo {#limit} caractéres`,
+      "any.required": `{#label} é um campo obrigatório`,
+      "string.email": `"{#label} deve ser um email válido`
     }
     return msgs;
   }

@@ -24,9 +24,12 @@ usersRouter.post(
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-      password: Joi.string().min(6).messages(customMessage.customPt('password'))
+      password: Joi.string().min(6)
     })
-  }, {abortEarly: false}),
+  }, {
+    abortEarly: false,
+    messages: customMessage.customPt()
+  }),
   userController.create);
 
 usersRouter.put(
