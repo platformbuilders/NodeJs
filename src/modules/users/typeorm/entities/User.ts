@@ -17,6 +17,9 @@ class User {
   @Column('int', {default: 1})
   status: number = 1;
 
+  @Column({ nullable: true })
+  avatar: string;
+
   @CreateDateColumn()
   created_at: Date;
 
