@@ -1,5 +1,5 @@
 
-import { UserRepository } from './../typeorm/repositories/UsersRepository';
+import { UsersRepository } from './../typeorm/repositories/UsersRepository';
 import { getCustomRepository } from "typeorm";
 import User from '../typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
@@ -20,7 +20,7 @@ interface IResponse {
 class CreateSessionService {
   public async execute({email, password}: IRequest): Promise<IResponse> {
     // utilizando um repo customizado
-    const userRepository = getCustomRepository(UserRepository);
+    const userRepository = getCustomRepository(UsersRepository);
     const user = await userRepository.findbyEmail(email);
 
     if (!user) {
