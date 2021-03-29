@@ -52,7 +52,14 @@ usersRouter.put(
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-      password: Joi.string().min(6)
+      password: Joi.string().min(6).optional(),
+      old_password: Joi.string().min(6),
+      password_confirmation: Joi.string()
+        .valid(Joi.ref('password'))
+        .when('password', {
+          is: Joi.exist(),
+          then: Joi.required(),
+        }),
     },
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
