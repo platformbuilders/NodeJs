@@ -1,11 +1,12 @@
 
 import { UsersRepository } from './../typeorm/repositories/UsersRepository';
-import { getCustomRepository } from "typeorm";
 import User from '../typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
+import { injectable, inject } from 'tsyringe';
+
 
 interface IRequest {
   email: string;
@@ -17,11 +18,16 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 class CreateSessionService {
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: UsersRepository
+    ) {};
+
   public async execute({email, password}: IRequest): Promise<IResponse> {
-    // utilizando um repo customizado
-    const userRepository = getCustomRepository(UsersRepository);
-    const user = await userRepository.findbyEmail(email);
+
+    const user = await this.userRepository.findbyEmail(email);
 
     if (!user) {
       throw new AppError('não autorizado.', 401);
@@ -33,7 +39,10 @@ class CreateSessionService {
       throw new AppError('Senha ou email incorreto.', 401);
     }
 
-    const token = sign({}, authConfig.jwt.secret, {
+    let secret;
+    if(authConfig.jwt.secret) secret = authConfig.jwt.secret;
+    else secret = '';
+    const token = sign({}, secret, {
       subject: user.id,
       expiresIn: authConfig.jwt.expiresIn,
     })

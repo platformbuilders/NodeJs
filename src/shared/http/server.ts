@@ -8,6 +8,7 @@ import {errors} from 'celebrate';
 import {pagination} from 'typeorm-pagination';
 import routes from './routes';
 import AppError from '@shared/errors/AppError';
+import '@shared/container';
 import '@shared/typeorm';
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(errors());
 
 //Error middleware
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
+  console.log(error);
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
       status: 'error',
