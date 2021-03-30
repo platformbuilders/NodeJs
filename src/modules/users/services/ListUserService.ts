@@ -1,8 +1,7 @@
 
 import { UsersRepository } from '../typeorm/repositories/UsersRepository';
-import { getCustomRepository } from "typeorm";
 import User from '../typeorm/entities/User';
-
+import { injectable, inject } from 'tsyringe';
 interface IPagination {
   from: number;
   to: number;
@@ -13,12 +12,16 @@ interface IPagination {
   next_page: number | null;
   data: User[];
 }
+@injectable()
 class ListUserService {
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: UsersRepository
+    ) {};
+
   public async execute(): Promise<IPagination> {
 
-    const userRepository = getCustomRepository(UsersRepository);
-
-    const user = await userRepository.createQueryBuilder().paginate();
+    const user = await this.userRepository.paginate();
 
     return user as IPagination;
   }

@@ -1,21 +1,25 @@
 
 import { UsersRepository } from './../typeorm/repositories/UsersRepository';
-import { getCustomRepository } from "typeorm";
 import User from '../typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import { hash } from 'bcryptjs';
-
+import { injectable, inject } from 'tsyringe';
 interface IRequest {
   name: string;
   email: string;
   password: string;
 }
 
+@injectable()
 class CreateUserService {
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: UsersRepository
+    ) {};
+
   public async execute({name, email, password}: IRequest): Promise<User> {
-    // utilizando um repo customizado
-    const userRepository = getCustomRepository(UsersRepository);
-    const userExists = await userRepository.findbyEmail(email);
+
+    const userExists = await this.userRepository.findbyEmail(email);
 
     if (userExists) {
       throw new AppError('Este email já foi cadastrado');
@@ -23,15 +27,14 @@ class CreateUserService {
 
     const hashedPassword = await hash(password, 8);
 
-    const user = userRepository.create({
+    const user = {
       name,
       email,
       password: hashedPassword
-    });
+    }
 
-    await userRepository.save(user);
+    return await this.userRepository.create(user as User);
 
-    return user;
   }
 }
 

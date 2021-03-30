@@ -1,22 +1,25 @@
 
 import { UsersRepository } from './../typeorm/repositories/UsersRepository';
-import { getCustomRepository } from "typeorm";
 import User from '../typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import path from 'path';
 import uploaConfig from '@config/upload';
 import fs from 'fs';
-
+import { injectable, inject } from 'tsyringe';
 interface IRequest {
   user_id: string;
   avatarFilename: string;
 }
-
+@injectable()
 class UpdateUserAvatarService {
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: UsersRepository
+    ) {};
+
   public async execute({user_id, avatarFilename}: IRequest): Promise<User> {
-    // utilizando um repo customizado
-    const userRepository = getCustomRepository(UsersRepository);
-    const user = await userRepository.findOne(user_id);
+
+    const user = await this.userRepository.findOne(user_id);
     // testar findone e migrar um update de avatar
     if(!user) {
       throw new AppError('User not found');
@@ -33,7 +36,7 @@ class UpdateUserAvatarService {
 
     user.avatar = avatarFilename;
 
-    await userRepository.save(user);
+    await this.userRepository.save(user);
 
     return user;
   }
