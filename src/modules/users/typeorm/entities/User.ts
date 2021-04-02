@@ -1,5 +1,6 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import {Exclude, Expose} from 'class-transformer';
+import Transaction from '@modules/transactions/typeorm/entities/Transaction';
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
@@ -26,6 +27,9 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(type => Transaction, transaction => transaction.user)
+  transactions: Transaction[];
 
   @Expose({name: 'avatar_url'})
   getAvatarUrl(): string | null {
