@@ -1,4 +1,6 @@
-import {Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+
+import Transaction from '@modules/transactions/typeorm/entities/Transaction';
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 @Entity('rev_exp')
 class RevExp {
@@ -19,6 +21,9 @@ class RevExp {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(type => Transaction, transaction => transaction.revExp)
+  transactions: Transaction[];
 
 }
 
