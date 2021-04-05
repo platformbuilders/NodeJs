@@ -1,5 +1,5 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
-
+// 1 - receita / 2- Despesa
 export class Createrevexp1617204022507 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -27,6 +27,10 @@ export class Createrevexp1617204022507 implements MigrationInterface {
               name: 'description',
               type: 'varchar',
               isNullable: true,
+            },
+            {
+              name: 'rec_des',
+              type: 'int',
             },
             {
               name: 'status',
