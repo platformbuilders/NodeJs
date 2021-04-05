@@ -1,8 +1,8 @@
-import PaymentType from './TransactionPaymentTypeEnum';
+import PaymentType from '../enums/TransactionPaymentTypeEnum';
 import RevExp from '@modules/rev_exp/typeorm/entities/RevExp';
 import User from '@modules/users/typeorm/entities/User';
 import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import PaymentStatus from './TransactionPaymentStatusEnum';
+import PaymentStatus from '../enums/TransactionPaymentStatusEnum';
 
 @Entity('transactions')
 class Transaction {

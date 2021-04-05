@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 import TransactionsController from '../controllers/TransactionsController';
-import PaymentType from '../typeorm/entities/TransactionPaymentTypeEnum';
-import PaymentStatus from '../typeorm/entities/TransactionPaymentStatusEnum';
+import PaymentType from '../typeorm/enums/TransactionPaymentTypeEnum';
+import PaymentStatus from '../typeorm/enums/TransactionPaymentStatusEnum';
 
 const transactionsRouter = Router();
 const transactionsController = new TransactionsController();

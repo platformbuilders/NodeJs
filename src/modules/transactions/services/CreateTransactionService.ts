@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
 import Transaction from '../typeorm/entities/Transaction';
-import PaymentStatus from '../typeorm/entities/TransactionPaymentStatusEnum';
-import PaymentType from '../typeorm/entities/TransactionPaymentTypeEnum';
+import PaymentStatus from '../typeorm/enums/TransactionPaymentStatusEnum';
+import PaymentType from '../typeorm/enums/TransactionPaymentTypeEnum';
 import TransactionsRepository from '../typeorm/repositories/TransactionsRepository';
 
 
