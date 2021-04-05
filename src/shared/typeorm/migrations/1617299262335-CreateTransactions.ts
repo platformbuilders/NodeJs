@@ -23,6 +23,12 @@ export class CreateTransactions1617299262335 implements MigrationInterface {
               type: 'uuid',
             },
             {
+              name: 'valor',
+              type: 'decimal',
+              precision: 10,
+              scale: 2
+            },
+            {
               name: 'forma_pagamento',
               type: 'enum',
               enum: ['debit', 'credit', 'cash']

@@ -4,8 +4,6 @@ import User from '@modules/users/typeorm/entities/User';
 import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import PaymentStatus from './TransactionPaymentStatusEnum';
 
-
-
 @Entity('transactions')
 class Transaction {
   @PrimaryGeneratedColumn('uuid')
@@ -22,6 +20,9 @@ class Transaction {
 
   @Column()
   status_pagamento: string;
+
+  @Column()
+  valor: number;
 
   @Column('int', {default: 1})
   status: number = 1;

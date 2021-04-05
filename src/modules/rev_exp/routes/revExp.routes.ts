@@ -11,7 +11,8 @@ revExpRouter.post(
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
       description: Joi.string(),
-      rev_exp_id: Joi.string().uuid()
+      rec_des: Joi.number().required(),
+      rev_exp_id: Joi.string().uuid().required()
     })
   }, {
     abortEarly: false

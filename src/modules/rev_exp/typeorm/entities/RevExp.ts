@@ -16,6 +16,12 @@ class RevExp {
   @Column({nullable: true})
   rev_exp_id: string;
 
+  @Column('int', {default: 1})
+  status: number = 1;
+
+  @Column('int')
+  rec_des: number;
+
   @CreateDateColumn()
   created_at: Date;
 

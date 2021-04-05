@@ -14,6 +14,7 @@ transactionsRouter.post(
       description: Joi.string(),
       rev_exp_id: Joi.string().uuid().required(),
       user_id: Joi.string().uuid().required(),
+      valor: Joi.number().required(),
       forma_pagamento: Joi.string().required().valid(PaymentType.cash, PaymentType.credit, PaymentType.debit),
       status_pagamento: Joi.string().required().valid(PaymentStatus.paid, PaymentStatus.unpaid, PaymentStatus.partial),
     })
