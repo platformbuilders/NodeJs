@@ -1,5 +1,5 @@
 
-import Transaction from '@modules/transactions/typeorm/entities/Transaction';
+import Transaction from '../../../../modules/transactions/typeorm/entities/Transaction';
 import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 @Entity('rev_exp')

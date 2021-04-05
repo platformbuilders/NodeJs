@@ -1,6 +1,6 @@
 import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import {Exclude, Expose} from 'class-transformer';
-import Transaction from '@modules/transactions/typeorm/entities/Transaction';
+import Transaction from '../../../../modules/transactions/typeorm/entities/Transaction';
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
