@@ -1,9 +1,10 @@
 # NodeJS Base Project
 
+<p align="center">
  <a href="https://platformbuilders.io">
     <img src="builder.png" alt="Logo" width="200" height="200">
  </a>
-
+</p>
 
 ## Descrição do Projeto
 <p align="center">Este é um projeto genérico base em NodeJs para facilitar e padronizar qualquer projeto derivado</p>
